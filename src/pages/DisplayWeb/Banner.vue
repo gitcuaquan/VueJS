@@ -1,7 +1,7 @@
 <template>
   <div class="q-ma-sm">
     <q-card class="my-card q-pa-sm">
-      <div class="text-center text-h5"> <b>Hiển Thị Banner Trang Web Của Bạn</b></div>
+      <div class="text-center text-h5"><b>Hiển Thị Banner Trang Web Của Bạn</b></div>
       <div class="row">
         <div class="col-3">
           <div class="q-ov-auto">
@@ -66,7 +66,7 @@
 <script>
 import { Cropper } from "vue-advanced-cropper";
 import { useQuasar } from "quasar";
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 import axios from "axios";
 import "vue-advanced-cropper/dist/style.css";
 
@@ -106,8 +106,8 @@ export default {
       },
     };
   },
-  computed:{
-    ...mapGetters('auth',['token'])
+  computed: {
+    ...mapGetters("auth", ["token"]),
   },
   components: { Cropper },
   data() {
@@ -142,9 +142,9 @@ export default {
             },
           })
           .then((res) => {
-            if(res.status == 200){
-              this.showNotif("Thông Báo 📣📣 Xóa Thành Công Banner","green-5")
-              this.getBanner()
+            if (res.status == 200) {
+              this.showNotif("Thông Báo 📣📣 Xóa Thành Công Banner", "green-5");
+              this.getBanner();
             }
           });
       }
@@ -165,12 +165,12 @@ export default {
             body: form,
           }).then((res) => {
             if (res.status == 200) {
-              this.showNotif("Thông Báo !! Lưu Logo Hoàn Tất", "green-5");
+              this.showNotif("Thông Báo !! Lưu Banner Hoàn Tất", "green-5");
               this.getBanner();
             }
             if (res.status == 400) {
               this.showNotif(
-                "Thông Báo !! Lưu Logo Thất Bại Đã Đủ 5 Banner Trong Hàng Đợi",
+                "Thông Báo !! Lưu Banner Thất Bại Đã Đủ 5 Banner Trong Hàng Đợi",
                 "red-5"
               );
             }

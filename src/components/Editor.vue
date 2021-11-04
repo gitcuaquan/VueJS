@@ -1,10 +1,8 @@
 <template>
   <div class="q-pa-md q-gutter-sm">
-      <q-btn color="primary"  label="Lưu Bài Viết" @click="log" />
     <q-editor
       v-model="qeditor"
       :dense="$q.screen.lt.md"
-      @change="log"
       :toolbar="[
         [
           {
@@ -78,18 +76,30 @@
   </div>
 </template>
 <script>
-import { ref } from "vue";
+
+import { mapActions,mapGetters } from "vuex";
 
 export default {
-  setup() {
+
+  data() {
     return {
-      qeditor: ref(''),
+      qeditor:"",
     };
   },
-  methods:{
-      log(){
-        console.log(this.qeditor);
-      }
-  }
+  mounted(){
+    this.qeditor = this.content
+  },
+  computed:{
+    ...mapGetters("post",['content'])
+  },
+  watch: {
+    qeditor: function () {
+      this.setContent(this.qeditor);
+    },
+  },
+  
+  methods: {
+    ...mapActions("post",["setContent"]),
+  },
 };
 </script>

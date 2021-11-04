@@ -40,3 +40,10 @@ div.q-table__grid-item-card.q-table__card {
   .transparent{
       background: transparent;
   }
+  .content {
+    height: 20px;
+    overflow: hidden;
+  }
+  .content::after {
+    content: "...";
+  }

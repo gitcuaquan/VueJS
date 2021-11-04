@@ -5,20 +5,15 @@ import auth from './modules/auth'
 import databill from './modules/databill'
 import user from './modules/user'
 import comment from './modules/comment'
+import post from './modules/post'
+import cart from './modules/cart';
 
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation;
- *
- * The function below can be async too; either use
- * async/await or return a Promise which resolves
- * with the Store instance.
- */
+
 
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
-      auth,databill,user,comment
+      auth, databill, user, comment, post, cart
     },
 
     // enable strict mode (adds overhead!)

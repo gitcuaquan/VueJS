@@ -4,7 +4,14 @@ const routes = [
     path: '/',
     component: () => import('layouts/ClientLayout.vue'),
     children:[
-      {path:'', component:()=>import('pages/Client/Home.vue')}
+      {path:'', component:()=>import('pages/Client/Home.vue')},
+      {path:'/news/', component:()=>import('pages/Client/News/showNews.vue')},
+      {path:'/news/:id', component:()=>import('pages/Client/News/detailNew.vue')},
+      {path:'/product', component:()=>import('pages/Client/Product/showProduct.vue')},
+      {path:'/product/:id', component:()=>import('pages/Client/Product/detailProduct.vue')},
+      {path:'/cart', component:()=>import('pages/Client/Cart.vue')},
+      
+      
     ]
   },
   {

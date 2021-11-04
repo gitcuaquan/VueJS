@@ -24,8 +24,7 @@
         </q-fab>
         <marquee
           ><div class="title">
-            🚥🚥Thông Báo 📣📣 Ngày 27/11/2000 Hệ Thống Nâng Cấp 🚧🚧 Yêu Cầu Nhân Viên
-            Lưu Trữ Dữ Liệu Quan Trọng🚥🚥
+            🚥🚥Thông Báo 📣📣 Web chính thức phát hành ngày 11/2/2021🚥🚥
           </div></marquee
         >
         <q-chip v-if="!leftDrawerOpen" class="q-mx-md">

@@ -1,6 +1,6 @@
 <template>
   <q-card class="my-card q-pa-md q-ma-md">
-    <q-table :rows="rows" :columns="columns"  :filter="filter" row-key="name">
+    <q-table :rows="rows" :columns="columns" :filter="filter" row-key="name">
       <template v-slot:top>
         <q-btn
           color="primary"
@@ -112,9 +112,9 @@
   </q-card>
 </template>
 <script>
-import axios from "axios";
+import api from "boot/apis/Auth";
 import { mapGetters } from "vuex";
-import { useQuasar } from 'quasar'
+import { useQuasar } from "quasar";
 const columns = [
   {
     name: "name",
@@ -166,18 +166,17 @@ const columns = [
 
 export default {
   setup() {
-    const $q = useQuasar()
+    const $q = useQuasar();
     return {
       columns,
-       showNotif (msg) {
+      showNotif(msg) {
         $q.notify({
-          message:msg,
-          color: 'green-10',
-          position:'top',
-          timeout:2000
-          
-        })
-      }
+          message: msg,
+          color: "green-10",
+          position: "top",
+          timeout: 2000,
+        });
+      },
     };
   },
   data() {
@@ -194,53 +193,28 @@ export default {
     ...mapGetters("auth", ["token"]),
   },
   methods: {
-    async getProduct() {
-      await axios
-        .get(`http://127.0.0.1:8000/api/products`, {
-          headers: {
-            "content-type": "multipart/form-data",
-            Authorization: "Bearer " + this.token,
-          },
-        })
-        .then((res) => {
-          this.rows = res.data;
-        });
+    getProduct() {
+      api.getDefaul("products").then((res) => {
+        this.rows = res.data;
+      });
     },
-    async Action(status, id) {
-      await axios
-        .get(`http://127.0.0.1:8000/api/products/${status}/${id}`, {
-          headers: {
-            Authorization: "Bearer " + this.token,
-          },
-        })
-        .then((res) => {
-          if (res.status == 200) {
-            this.getProduct();
-          }
-        });
+    Action(status, id) {
+      api.getDefaul(`products/${status}/${id}`).then((res) => {
+        if (res.status == 200) {
+          this.getProduct();
+        }
+      });
     },
-    async Filter(status) {
-      await axios
-        .get(`http://127.0.0.1:8000/api/products/${status}`, {
-          headers: {
-            Authorization: "Bearer " + this.token,
-          },
-        })
-        .then((res) => {
-          this.rows = res.data;
-        });
+    Filter(status) {
+      api.getDefaul(`products/${status}`).then((res) => {
+        this.rows = res.data;
+      });
     },
-     async Active(status) {
-      await axios
-        .get(`http://127.0.0.1:8000/api/productsactive/${status}`, {
-          headers: {
-            Authorization: "Bearer " + this.token,
-          },
-        })
-        .then(() => {
-          this.getProduct()
-          this.showNotif("Thông báo 📣📣Cập Nhật Thành Công")
-        });
+    Active(status) {
+      api.get(`productsactive/${status}`).then(() => {
+        this.getProduct();
+        this.showNotif("Thông báo 📣📣Cập Nhật Thành Công");
+      });
     },
   },
 };
